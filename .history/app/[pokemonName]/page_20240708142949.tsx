@@ -110,7 +110,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
               const statValue = statObject.base_stat;
 
               return (
-                <div key={'id'}>
+                <div key={statObject}>
                 
                   <h3>{statName}: {statValue}</h3>
                   <Progress value={statValue}/>

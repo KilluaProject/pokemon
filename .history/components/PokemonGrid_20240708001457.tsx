@@ -9,7 +9,7 @@ interface PokemonGridProps {
 
 export function PokemonGrid({ pokemonList }: PokemonGridProps) {
     const [searchText, setSearchText] = useState("");
-    const [loadData, setLoadData] = useState(20);
+    const [loadData, setLoadData] = useState(20); // Initial number of items to show
     const [loading, setLoading] = useState(false);
 
     const searchFilter = (pokemonList: any[]) => {
@@ -51,7 +51,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                 })}
             </div>
             {loadData < filteredPokemonList.length && (
-                <div key={pokemonList.id} className="flex justify-center mt-4 mb-4">
+                <div className="flex justify-center mt-4 mb-4">
                     {loading ? (
                         <div className="flex items-center justify-center">
                             <div className="loader border-t-4 border-blue-500 rounded-full w-6 h-6 animate-spin"></div>

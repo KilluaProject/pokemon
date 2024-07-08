@@ -63,14 +63,14 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
             Back
             </button> 
       </Link>
-      <div className='bg-gray-100 rounded-sm flex justify-center items-center max-w-md mx-auto py-3 px-6  gap-4 '>
+      <div className='bg-gray-100 rounded-sm flex justify-between items-center max-w-md mx-auto py-3 px-6  gap-4 '>
         <h1 className={`text-4xl font-semibold text-center`}>
               {pokemonName.charAt(0).toUpperCase() + pokemonName.slice(1)}
         </h1>
         <h2 className='text-center font-medium text-xl'>{formatPokemonNumber(pokemonObject.id || "")}</h2>
       </div>
 
-      <div className="flex mx-auto justify-center items-start w-full gap-10">
+      <div className="flex mx-auto justify-between items-start w-full gap-10">
         
         <div className="border w-[40%] border-slate-200 p-4 rounded-md flex flex-col items-center justify-center bg-gray-100 h-[30rem] ">
           <Image 
@@ -110,7 +110,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
               const statValue = statObject.base_stat;
 
               return (
-                <div key={'id'}>
+                <div>
                 
                   <h3>{statName}: {statValue}</h3>
                   <Progress value={statValue}/>
