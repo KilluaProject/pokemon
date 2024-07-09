@@ -5,7 +5,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { Progress } from '@/components/ui/progress';
-import { Stats } from 'fs';
 
 
 interface PokemonDetailProps {
@@ -89,9 +88,10 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
             {pokemonObject.types.map((statType: StatType) => {
               const type = statType.type.name;
               return (
-                <div key={pokemonObject} className=' flex'>
+                <div key={type} className=' flex'>
 
                 <span 
+                  key={type}
                   style={{ backgroundColor: COLOR_TYPES[type] }}
                   className="px-5 py-2 rounded-md text-white uppercase" 
                 >
@@ -108,7 +108,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
               const statValue = statObject.base_stat;
 
               return (
-                <div key={pokemonObject.id}>
+                <div key={'id'}>
                 
                   <h3>{statName}: {statValue}</h3>
                   <Progress value={statValue}/>

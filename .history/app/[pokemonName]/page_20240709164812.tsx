@@ -89,9 +89,10 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
             {pokemonObject.types.map((statType: StatType) => {
               const type = statType.type.name;
               return (
-                <div key={pokemonObject} className=' flex'>
+                <div key={type} className=' flex'>
 
                 <span 
+                  key={type}
                   style={{ backgroundColor: COLOR_TYPES[type] }}
                   className="px-5 py-2 rounded-md text-white uppercase" 
                 >

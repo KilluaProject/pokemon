@@ -28,7 +28,7 @@ const COLOR_TYPES : {[key: string]: string }  = {
   fairy: '#D685AD',
 };
 
-export function PokemonCard({ name,image, types }: PokemonCardProps) {
+export function PokemonCard({ name, image, types }: PokemonCardProps) {
     return (
         <div>
             <Link
@@ -41,7 +41,7 @@ export function PokemonCard({ name,image, types }: PokemonCardProps) {
                 </h2>
                 <Image
                     className=""
-                    src={image}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${image}.png`}
                     alt={name}
                     width={150}
                     height={150}

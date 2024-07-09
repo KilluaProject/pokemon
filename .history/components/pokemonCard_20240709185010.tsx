@@ -41,7 +41,7 @@ export function PokemonCard({ name,image, types }: PokemonCardProps) {
                 </h2>
                 <Image
                     className=""
-                    src={image}
+                    src={`image`}
                     alt={name}
                     width={150}
                     height={150}

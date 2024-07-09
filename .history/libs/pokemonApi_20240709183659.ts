@@ -11,8 +11,6 @@ export async function PokemonList() {
                 name: pokemon.name,
                 url: pokemon.url,
                 types: pokemonDetailData.types.map((typeInfo:any) => typeInfo.type.name),
-                image: pokemonDetailData.sprites.other['official-artwork'].front_default,
-                
             };
         })
     );

@@ -1,23 +1,20 @@
 const POKEMON_API = "https://pokeapi.co/api/v2/";
 
 export async function PokemonList() {
-    const response = await fetch(`${POKEMON_API}pokemon?limit=10000&offset=0`);
+    const response = await fetch(`${POKEMON_API}pokemon?limit=10&offset=0`);
     const data = await response.json();
+
     const detailedPokemonData = await Promise.all(
-        data.results.map(async (pokemon:any) => {
+        data.results.map(async (pokemon) => {
             const pokemonDetailResponse = await fetch(pokemon.url);
             const pokemonDetailData = await pokemonDetailResponse.json();
             return {
                 name: pokemon.name,
                 url: pokemon.url,
-                types: pokemonDetailData.types.map((typeInfo:any) => typeInfo.type.name),
-                image: pokemonDetailData.sprites.other['official-artwork'].front_default,
-                
+                types: pokemonDetailData.types.map((typeInfo) => typeInfo.type.name),
             };
         })
     );
-    console.log(detailedPokemonData);
-    
 
     return detailedPokemonData;
 }

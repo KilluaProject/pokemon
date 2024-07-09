@@ -28,7 +28,7 @@ const COLOR_TYPES : {[key: string]: string }  = {
   fairy: '#D685AD',
 };
 
-export function PokemonCard({ name,image, types }: PokemonCardProps) {
+export function PokemonCard({ name, types }: PokemonCardProps) {
     return (
         <div>
             <Link

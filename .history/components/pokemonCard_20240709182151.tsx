@@ -4,10 +4,10 @@ import Link from "next/link";
 interface PokemonCardProps {
     name: string;
     image: string;
-    types: string[];
+    types: string[];  // Add types prop
 }
 
-const COLOR_TYPES : {[key: string]: string }  = {
+const COLOR_TYPES = {
   normal: '#A8A77A',
   fire: '#EE8130',
   water: '#6390F0',
@@ -28,7 +28,7 @@ const COLOR_TYPES : {[key: string]: string }  = {
   fairy: '#D685AD',
 };
 
-export function PokemonCard({ name,image, types }: PokemonCardProps) {
+export function PokemonCard({ name, image, types }: PokemonCardProps) {
     return (
         <div>
             <Link
@@ -41,7 +41,7 @@ export function PokemonCard({ name,image, types }: PokemonCardProps) {
                 </h2>
                 <Image
                     className=""
-                    src={image}
+                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${image}.png`}
                     alt={name}
                     width={150}
                     height={150}

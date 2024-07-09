@@ -44,11 +44,11 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
             </div>
             <div className="grid gap-2 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
                 {filteredPokemonList.slice(0, loadData).map((pokemon: any) => {
-                    //const images = pokemon.url.split('/')[6];
+                    const images = pokemon.url.split('/')[6];
 
                     return (
                         <PokemonCard
-                            image={pokemon.image}
+                            
                             name={pokemon.name}
                             types={pokemon.types}  // Pass the types prop
                             key={pokemon.name + "Card"}

@@ -48,7 +48,7 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
 
                     return (
                         <PokemonCard
-                            image={pokemon.image}
+                            
                             name={pokemon.name}
                             types={pokemon.types}  // Pass the types prop
                             key={pokemon.name + "Card"}
