@@ -15,7 +15,6 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
     const [fetching, setFetching] = useState(true);
 
     useEffect(() => {
-        
         const fetchDetailedPokemon = async () => {
             try {
                 const detailedData = await Promise.all(
@@ -29,10 +28,10 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                     })
                 );
                 setDetailedPokemonList(detailedData);
-                setFetching(false); 
+                setFetching(false); // Set fetching to false after data is fetched
             } catch (error) {
                 console.error("Error fetching Pokémon data:", error);
-                setFetching(false); 
+                setFetching(false); // Set fetching to false if there's an error
             }
         };
         fetchDetailedPokemon();

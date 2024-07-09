@@ -12,10 +12,8 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
     const [loadData, setLoadData] = useState(20);
     const [loading, setLoading] = useState(false);
     const [detailedPokemonList, setDetailedPokemonList] = useState<any[]>([]);
-    const [fetching, setFetching] = useState(true);
 
     useEffect(() => {
-        
         const fetchDetailedPokemon = async () => {
             try {
                 const detailedData = await Promise.all(
@@ -29,10 +27,8 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                     })
                 );
                 setDetailedPokemonList(detailedData);
-                setFetching(false); 
             } catch (error) {
                 console.error("Error fetching Pokémon data:", error);
-                setFetching(false); 
             }
         };
         fetchDetailedPokemon();
@@ -68,44 +64,35 @@ export function PokemonGrid({ pokemonList }: PokemonGridProps) {
                     />
                 </div>
             </div>
-            {fetching ? (
-                <div className="flex justify-center items-center h-64">
-                    <div className="loader border-t-4 border-blue-500 rounded-full w-12 h-12 animate-spin"></div>
-                    <p className="ml-2">Loading Pokémon data...</p>
-                </div>
-            ) : (
-                <>
-                    <div className="grid gap-2 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-                        {filteredPokemonList.slice(0, loadData).map((pokemon: any) => {
-                            const images = pokemon.url.split('/')[6];
+            <div className="grid gap-2 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
+                {filteredPokemonList.slice(0, loadData).map((pokemon: any) => {
+                    const images = pokemon.url.split('/')[6];
 
-                            return (
-                                <PokemonCard
-                                    image={images}
-                                    name={pokemon.name}
-                                    key={pokemon.name + "Card"}
-                                    types={pokemon.types}
-                                />
-                            );
-                        })}
-                    </div>
-                    {loadData < filteredPokemonList.length && (
-                        <div key={pokemonList.id} className="flex justify-center mt-4 mb-4">
-                            {loading ? (
-                                <div className="flex items-center justify-center">
-                                    <div className="loader border-t-4 border-blue-500 rounded-full w-6 h-6 animate-spin"></div>
-                                </div>
-                            ) : (
-                                <button
-                                    onClick={loadMoreItems}
-                                    className="px-4 py-2 border rounded-md bg-blue-500 text-white"
-                                >
-                                    Load More
-                                </button>
-                            )}
+                    return (
+                        <PokemonCard
+                            image={images}
+                            name={pokemon.name}
+                            key={pokemon.name + "Card"}
+                            types={pokemon.types}
+                        />
+                    );
+                })}
+            </div>
+            {loadData < filteredPokemonList.length && (
+                <div key={pokemonList.id} className="flex justify-center mt-4 mb-4">
+                    {loading ? (
+                        <div className="flex items-center justify-center">
+                            <div className="loader border-t-4 border-blue-500 rounded-full w-6 h-6 animate-spin"></div>
                         </div>
+                    ) : (
+                        <button
+                            onClick={loadMoreItems}
+                            className="px-4 py-2 border rounded-md bg-blue-500 text-white"
+                        >
+                            Load More
+                        </button>
                     )}
-                </>
+                </div>
             )}
         </div>
     );

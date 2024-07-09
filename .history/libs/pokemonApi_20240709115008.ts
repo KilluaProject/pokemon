@@ -2,13 +2,17 @@ const POKEMON_API = "https://pokeapi.co/api/v2/"
 
 
 export async function PokemonList() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0")
-    const data = await response.json()
-    return data.results
-}
-
-
-
+    let pokemonList = [];
+    // .. fetch pokemon list
+    const response = await fetch(
+      "https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0"
+    );
+    const list = await response.json();
+    pokemonList = list;
+  
+    const pokemonListWithDetail = await Promise.all(pokemonList.map(getPokemon));
+    return pokemonListWithDetail;
+  }
 
 export async function getPokemon(name: string) {
     // pokemon/ditto

@@ -9,14 +9,6 @@ export async function PokemonList() {
 
 
 
-
-export async function getPokemon(name: string) {
-    // pokemon/ditto
-    const response = await fetch(POKEMON_API + "pokemon/" + name);
-    const data = await response.json();
-    return data;
-}
-
 export async function getPokemonSpecies(id: string) {
     // pokemon/species
     const response = await fetch(POKEMON_API + "pokemon-species/" + id);

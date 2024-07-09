@@ -8,7 +8,18 @@ export async function PokemonList() {
 }
 
 
-
+export async function PokemonList() {
+    let pokemonList = [];
+    // .. fetch pokemon list
+    const response = await fetch(
+      "https://pokeapi.co/api/v2/pokemon?limit=10000&offset=0"
+    );
+    const list = await response.json();
+    pokemonList = list;
+  
+    const pokemonListWithDetail = await Promise.all(pokemonList.map(getPokemon));
+    return pokemonListWithDetail;
+  }
 
 export async function getPokemon(name: string) {
     // pokemon/ditto

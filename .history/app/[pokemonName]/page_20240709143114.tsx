@@ -47,7 +47,12 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
 
   const speciesResponse = await fetch(`https://pokeapi.co/api/v2/pokemon-species/${pokemonObject.id}/`);
   const speciesData = await speciesResponse.json();
+  console.log(speciesData);
   
+
+
+  
+
   const formatPokemonNumber = (number:string): string =>{
     return `#${String(number).padStart(4,"0")}` 
   }

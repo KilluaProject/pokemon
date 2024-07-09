@@ -5,7 +5,7 @@ import {PokemonList } from "@/libs/pokemonApi";
 
 export default async function Home() {
   const pokemonList = await PokemonList();
-  
+  console.log(pokemonList);
   
 
   
