@@ -40,5 +40,16 @@ export async function getPokemonSpecies(name: string) {
 }
 
 
+export async function getAllPokemon(){
 
+    const maxStats = getAllPokemon.reduce((max, pokemon) => {
+      pokemon.stats.forEach(stat => {
+        const statName = stat.stat.name;
+        if (!max[statName] || stat.base_stat > max[statName]) {
+          max[statName] = stat.base_stat;
+        }
+      });
+      return max;
+    }, {});
+}
 // Find maximum stat values for each stat across all Pokemon

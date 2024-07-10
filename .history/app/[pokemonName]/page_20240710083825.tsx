@@ -49,6 +49,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
   }
   const totalStats = pokemonObject.stats.reduce((akumulasi: number, stat: any) => akumulasi + stat.base_stat, 0);
   const maxValue = 250;
+
   
 
   return (
@@ -105,7 +106,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
               const statValue = statObject.base_stat;
               const statPercentage = totalStats ? Math.round((statValue / maxValue ) * 100) : 100;
               return (
-                <div key={statName}>  
+                <div key={statName}>
                   <h3 className='uppercase'>{statName}</h3>
                   <Progress  max={statPercentage} value={statPercentage} />
                 </div>

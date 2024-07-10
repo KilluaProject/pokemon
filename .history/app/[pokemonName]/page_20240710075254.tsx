@@ -38,7 +38,11 @@ const COLOR_TYPES = {
   fairy: '#D685AD',
 }
 
+const MAX_STAT_VALUE = 100;
 
+function calculatedPersente(value:number, MAX_STAT_VALUE: number):number {
+  return (value / MAX_STAT_VALUE) * 100;
+}
 
 export default async function PokemonPage({ params }: PokemonDetailProps) {
   const { pokemonName } = params;
@@ -47,10 +51,12 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
   const formatPokemonNumber = (number: string): string => {
     return `#${String(number).padStart(4, "0")}`;
   }
-  const totalStats = pokemonObject.stats.reduce((akumulasi: number, stat: any) => akumulasi + stat.base_stat, 0);
-  const maxValue = 250;
-  
 
+  const totalStats = calculatedPersente.pokemonObject.stats.reduce((akumulasi: number, stat: any) => akumulasi + stat.base_stat, 0);
+  
+  console.log(totalStats);
+
+  
   return (
     <div className="relative container pt-5 mx-auto flex flex-col gap-10 pb-10">
       <Link className='lg:absolute lg:top-20 lg:z-50 hidden ' href={'/'}>
@@ -79,7 +85,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
         </div>
         <div className='flex flex-col gap-3'>
           <h1 className='font-bold text-xl'>Descriptions</h1>
-          <p className='font-normal max-w-lg'>{speciesData.flavor_text_entries.find((entry: any) => entry.language.name === 'ko')?.flavor_text || 'No description available.'}</p>
+          <p className='font-normal max-w-lg'>{speciesData.flavor_text_entries.find((entry: any) => entry.language.name === 'en')?.flavor_text || 'No description available.'}</p>
           <h2 className='text-xl font-bold'>Type Pokemon</h2>
 
           <div className="flex gap-3">
@@ -98,22 +104,25 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
             })}
           </div>
           <div className=''>
-          <h1 className='text-xl font-bold mb-1'>Status Pokemon</h1>
-            {pokemonObject.stats.map((statObject: any) => {
-              
-              const statName = statObject.stat.name;
-              const statValue = statObject.base_stat;
-              const statPercentage = totalStats ? Math.round((statValue / maxValue ) * 100) : 100;
-              return (
-                <div key={statName}>  
-                  <h3 className='uppercase'>{statName}</h3>
-                  <Progress  max={statPercentage} value={statPercentage} />
-                </div>
-              );
-            })}
+            
           </div>
         </div>
       </div>
+
+      <h1 className='text-xl font-bold mb-1'>Status Pokemon</h1>
+            {pokemonObject.stats.map((statObject: any) => {
+              const statName = statObject.stat.name;
+              const statValue = statObject.base_stat;
+              const statPercentage = Math.round((statValue ) * 100);
+              console.log(statPercentage);
+              
+              return (
+                <div key={statName}>
+                  <h3>{statName}: {statValue}</h3>
+                  <Progress value={statPercentage} />
+                </div>
+              );
+            })}
     </div>
   )
 }
