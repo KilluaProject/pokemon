@@ -9,11 +9,12 @@ interface PokemonGridProps {
 }
 
 
-export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
+export function PokemonGrid({types, pokemonList }: PokemonGridProps) {
     const [searchText, setSearchText] = useState("");
-    const [selectedType, setSelectedType] = useState("");
     const [loadData, setLoadData] = useState(20);
     const [loading, setLoading] = useState(false);
+    console.log();
+    
 
     const searchFilter = (pokemonList: any[]) => {
         return pokemonList.filter((pokemon) =>
@@ -21,21 +22,14 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
         );
     };
 
-    const typeFilter = (pokemonList: any[]) => {
-        if (!selectedType) return pokemonList;
-        return pokemonList.filter((pokemon) =>
-            pokemon.types.includes(selectedType)
-        );
-    };
-
-    const filteredPokemonList = typeFilter(searchFilter(pokemonList));
+    const filteredPokemonList = searchFilter(pokemonList);
 
     const loadMoreItems = () => {
-        setLoading(true);
+        setLoading(true); 
         setTimeout(() => {
-            setLoadData(loadData + 20);
-            setLoading(false);
-        }, 1000);
+            setLoadData(loadData + 20); 
+            setLoading(false); 
+        }, 1000); 
     };
 
     return (
@@ -50,25 +44,13 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                         placeholder="Enter a Pokemon name"
                         onChange={(e) => setSearchText(e.target.value)}
                     />
-                    <select
-                        className="border px-4 py-3 rounded-md"
-                        value={selectedType}
-                        onChange={(e) => setSelectedType(e.target.value)}
-                    >
-                        <option className="p-4" value="">All Types</option>
-                        {types.map((type) => (
-                            <option className="p-4" key={type} value={type}>
-                                {type}
-                            </option>
-                        ))}
-                    </select>
                 </div>
             </div>
-            <div className="grid gap-2 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
+            <div className=" grid gap-2 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
                 {filteredPokemonList.slice(0, loadData).map((pokemon: any) => {
                     return (
                         <PokemonCard
-                            id={pokemon.id}
+                            id ={pokemon.id}
                             image={pokemon.image}
                             name={pokemon.name}
                             types={pokemon.types}

@@ -40,7 +40,8 @@ export async function getPokemonSpecies(name: string) {
 
 export async function sortirPokemon() {
     const response = await fetch(`${POKEMON_API}type`)
-    const typesData =  await response.json()
-    const types = typesData.results.map((type: any) => type.name);
-    return types
+    const typeData =  await response.json()
+    console.log(typeData);
+    
+    
 }

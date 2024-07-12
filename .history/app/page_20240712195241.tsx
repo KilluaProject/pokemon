@@ -1,9 +1,11 @@
+// pages/page.tsx
 
 import { PokemonGrid } from "@/components/PokemonGrid";
-import { PokemonList } from "@/libs/pokemonApi";
+import { PokemonList } from "@/lib/pokemonApi";
 
 export default async function Home() {
     const pokemonList = await PokemonList();
+    
     const res = await fetch('https://pokeapi.co/api/v2/type');
     const typesData = await res.json();
     const types = typesData.results.map((type: any) => type.name);

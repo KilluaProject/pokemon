@@ -104,6 +104,8 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
               const statName = statObject.stat.name;
               const statValue = statObject.base_stat;
               const statPercentage = totalStats ? Math.round((statValue / maxValue ) * 100) : 100;
+              console.log(statPercentage);
+              
               return (
                 <div key={statName}>  
                   <h3 className='uppercase'>{statName} {statValue}</h3>

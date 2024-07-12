@@ -50,6 +50,7 @@ export function PokemonCard({ name,image, types,id }: PokemonCardProps) {
                     {formatPokemonNumberId(id)}
                 </h2>
                 <Image
+                    
                     src={image}
                     alt={name}
                     width={150}

@@ -1,27 +1,35 @@
-"use client"
+// components/PokemonGrid.tsx
 
-import { PokemonCard } from "./pokemonCard";
+"use client";
+
 import { useState } from "react";
+import { PokemonCard } from "./PokemonCard";
 
-interface PokemonGridProps {
-    pokemonList: any;
+interface Pokemon {
+    id: number;
+    name: string;
+    url: string;
     types: string[];
+    image: string;
 }
 
+interface PokemonGridProps {
+    pokemonList: Pokemon[];
+}
 
-export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
+export function PokemonGrid({ pokemonList }: PokemonGridProps) {
     const [searchText, setSearchText] = useState("");
-    const [selectedType, setSelectedType] = useState("");
     const [loadData, setLoadData] = useState(20);
     const [loading, setLoading] = useState(false);
+    const [selectedType, setSelectedType] = useState("");
 
-    const searchFilter = (pokemonList: any[]) => {
+    const searchFilter = (pokemonList: Pokemon[]) => {
         return pokemonList.filter((pokemon) =>
             pokemon.name.toLowerCase().includes(searchText.toLowerCase())
         );
     };
 
-    const typeFilter = (pokemonList: any[]) => {
+    const typeFilter = (pokemonList: Pokemon[]) => {
         if (!selectedType) return pokemonList;
         return pokemonList.filter((pokemon) =>
             pokemon.types.includes(selectedType)
@@ -55,30 +63,32 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value)}
                     >
-                        <option className="p-4" value="">All Types</option>
-                        {types.map((type) => (
-                            <option className="p-4" key={type} value={type}>
+                        <option value="">All Types</option>
+                        {/* You can fetch and map Pokémon types here */}
+                        {/* Example: */}
+                        {/* {types.map((type) => (
+                            <option key={type} value={type}>
                                 {type}
                             </option>
-                        ))}
+                        ))} */}
                     </select>
                 </div>
             </div>
             <div className="grid gap-2 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-                {filteredPokemonList.slice(0, loadData).map((pokemon: any) => {
+                {filteredPokemonList.slice(0, loadData).map((pokemon) => {
                     return (
                         <PokemonCard
+                            key={pokemon.id}
                             id={pokemon.id}
                             image={pokemon.image}
                             name={pokemon.name}
                             types={pokemon.types}
-                            key={pokemon.name + "Card"}
                         />
                     );
                 })}
             </div>
             {loadData < filteredPokemonList.length && (
-                <div key={pokemonList.id} className="flex justify-center mt-4 mb-4">
+                <div className="flex justify-center mt-4 mb-4">
                     {loading ? (
                         <div className="flex items-center justify-center">
                             <div className="loader border-t-4 border-blue-500 rounded-full w-6 h-6 animate-spin"></div>

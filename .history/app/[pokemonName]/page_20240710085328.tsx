@@ -79,7 +79,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
         </div>
         <div className='flex flex-col gap-3'>
           <h1 className='font-bold text-xl'>Descriptions</h1>
-          <p className='font-normal max-w-lg'>{speciesData.flavor_text_entries.find((entry: any) => entry.language.name === 'en')?.flavor_text || 'No description available.'}</p>
+          <p className='font-normal max-w-lg'>{speciesData.flavor_text_entries.find((entry: any) => entry.language.name === 'ko')?.flavor_text || 'No description available.'}</p>
           <h2 className='text-xl font-bold'>Type Pokemon</h2>
 
           <div className="flex gap-3">
@@ -106,7 +106,7 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
               const statPercentage = totalStats ? Math.round((statValue / maxValue ) * 100) : 100;
               return (
                 <div key={statName}>  
-                  <h3 className='uppercase'>{statName} {statValue}</h3>
+                  <h3 className='uppercase'>{statName}</h3>
                   <Progress  max={statPercentage} value={statPercentage} />
                 </div>
               );

@@ -1,19 +1,26 @@
 "use client"
 
 import { PokemonCard } from "./pokemonCard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface PokemonGridProps {
     pokemonList: any;
-    types: string[];
 }
 
-
-export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
+export function PokemonGrid({ pokemonList }: PokemonGridProps) {
     const [searchText, setSearchText] = useState("");
-    const [selectedType, setSelectedType] = useState("");
     const [loadData, setLoadData] = useState(20);
     const [loading, setLoading] = useState(false);
+    const [selectedType, setSelectedType] = useState("");
+    const [types, setTypes] = useState([]);
+
+    useEffect(() => {
+        // Fetch Pokémon types from your API
+        fetch("https://pokeapi.co/api/v2/types")
+            .then((response) => response.json())
+            .then((data) => setTypes(data))
+            .catch((error) => console.error("Error fetching types:", error));
+    }, []);
 
     const searchFilter = (pokemonList: any[]) => {
         return pokemonList.filter((pokemon) =>
@@ -55,9 +62,9 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value)}
                     >
-                        <option className="p-4" value="">All Types</option>
+                        <option value="">All Types</option>
                         {types.map((type) => (
-                            <option className="p-4" key={type} value={type}>
+                            <option key={type} value={type}>
                                 {type}
                             </option>
                         ))}

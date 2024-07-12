@@ -1,4 +1,3 @@
-
 const POKEMON_API = "https://pokeapi.co/api/v2/";
 
 export async function PokemonList() {
@@ -8,7 +7,6 @@ export async function PokemonList() {
         data.results.map(async (pokemon:any) => {
             const pokemonDetailResponse = await fetch(pokemon.url);
             const pokemonDetailData = await pokemonDetailResponse.json();
-            
             return {
                 id : pokemonDetailData.id,
                 name: pokemon.name,
@@ -38,9 +36,4 @@ export async function getPokemonSpecies(name: string) {
 
 
 
-export async function sortirPokemon() {
-    const response = await fetch(`${POKEMON_API}type`)
-    const typesData =  await response.json()
-    const types = typesData.results.map((type: any) => type.name);
-    return types
-}
+// Find maximum stat values for each stat across all Pokemon

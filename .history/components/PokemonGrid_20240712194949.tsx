@@ -1,14 +1,3 @@
-"use client"
-
-import { PokemonCard } from "./pokemonCard";
-import { useState } from "react";
-
-interface PokemonGridProps {
-    pokemonList: any;
-    types: string[];
-}
-
-
 export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
     const [searchText, setSearchText] = useState("");
     const [selectedType, setSelectedType] = useState("");
@@ -55,9 +44,9 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                         value={selectedType}
                         onChange={(e) => setSelectedType(e.target.value)}
                     >
-                        <option className="p-4" value="">All Types</option>
+                        <option value="">All Types</option>
                         {types.map((type) => (
-                            <option className="p-4" key={type} value={type}>
+                            <option key={type} value={type}>
                                 {type}
                             </option>
                         ))}
