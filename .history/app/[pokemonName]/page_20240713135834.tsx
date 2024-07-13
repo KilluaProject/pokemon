@@ -1,5 +1,3 @@
-"use client"
-
 import React, { useState, useEffect } from 'react'
 import { getPokemon, getPokemonSpecies } from '@/libs/pokemonApi'
 import Image from 'next/image';
@@ -75,7 +73,7 @@ export default function PokemonPage({ params }: PokemonDetailProps) {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
-        <ClipLoader size={40} color={"#123abc"} loading={loading} />
+        <ClipLoader size={150} color={"#123abc"} loading={loading} />
       </div>
     );
   }
