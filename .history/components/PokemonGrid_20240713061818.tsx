@@ -11,7 +11,7 @@ interface PokemonGridProps {
 
 export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
     const [searchText, setSearchText] = useState("");
-    const [selectedType, setSelectedType] = useState("All Pokemon");
+    const [selectedType, setSelectedType] = useState("");
     const [loadData, setLoadData] = useState(20);
     const [loading, setLoading] = useState(false);
 
@@ -22,7 +22,7 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
     };
 
     const typeFilter = (pokemonList: any[]) => {
-        if (selectedType === "All Pokemon") return pokemonList;
+        if (!selectedType) return pokemonList;
         return pokemonList.filter((pokemon) =>
             pokemon.types.includes(selectedType)
         );
@@ -40,24 +40,33 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
 
     return (
         <div className="relative flex flex-col gap-3">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col">
                 <h1 className="text-2xl font-bold">Search Your Favorite Pokemon</h1>
-                <div className="grid grid-cols-2 gap-2 items-center">
+                <div className="flex gap-2 items-center">
                     <input
-                        className="border px-4 py-2 rounded-md max-w-full w-full"
+                        className="border px-4 py-3 rounded-md max-w-full w-[25%]"
                         type="text"
                         value={searchText}
                         placeholder="Enter a Pokemon name"
                         onChange={(e) => setSearchText(e.target.value)}
                     />
+                    <select
+                        className="border px-4 py-3 rounded-md"
+                        value={selectedType}
+                        onChange={(e) => setSelectedType(e.target.value)}
+                    >
+                        <option className="p-4" value="">All Types</option>
+                        {types.map((type) => (
+                            <option className="p-4" key={type} value={type}>
+                                {type}
+                            </option>
+                        ))}
+                    </select>
                     <Select value={selectedType} onValueChange={(value) => setSelectedType(value)}>
                         <SelectTrigger>
-                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20 " />
+                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20" />
                         </SelectTrigger>
-                        <SelectContent className="">
-                            <SelectItem className="p-4" value="All Pokemon">
-                                All Pokemon
-                            </SelectItem>
+                        <SelectContent>
                             {types.map((type) => (
                                 <SelectItem className="p-4" key={type} value={type}>
                                     {type}

@@ -2,7 +2,7 @@
 const POKEMON_API = "https://pokeapi.co/api/v2/";
 
 export async function PokemonList() {
-    const response = await fetch(`${POKEMON_API}pokemon?limit=151&offset=0`);
+    const response = await fetch(`${POKEMON_API}pokemon?limit=10000&offset=0`);
     const data = await response.json();
     const detailedPokemonData = await Promise.all(
         data.results.map(async (pokemon:any) => {
@@ -36,3 +36,11 @@ export async function getPokemonSpecies(name: string) {
     
 }
 
+
+
+export async function sortirPokemon() {
+    const response = await fetch(`${POKEMON_API}type`)
+    const typesData =  await response.json()
+    const types = typesData.results.map((type: any) => type.name);
+    return types
+}

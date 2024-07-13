@@ -1,4 +1,6 @@
-import React from 'react'
+"use client"
+
+import React, { useState, useEffect } from 'react'
 import { getPokemon, getPokemonSpecies } from '@/libs/pokemonApi'
 import Image from 'next/image';
 import Link from 'next/link';
@@ -6,15 +8,15 @@ import { FaLongArrowAltLeft } from 'react-icons/fa';
 import { Progress } from '@/components/ui/progress';
 
 interface PokemonDetailProps {
-    params: {
-        pokemonName: string;
-    };
+  params: {
+    pokemonName: string;
+  };
 }
 
 interface StatType {
-    type: {
-        name: keyof typeof COLOR_TYPES
-    };
+  type: {
+    name: keyof typeof COLOR_TYPES
+  };
 }
 
 const COLOR_TYPES = {
@@ -38,20 +40,40 @@ const COLOR_TYPES = {
   fairy: '#D685AD',
 }
 
-
-
-export default async function PokemonPage({ params }: PokemonDetailProps) {
+export default function PokemonPage({ params }: PokemonDetailProps) {
   const { pokemonName } = params;
-  const pokemonObject = await getPokemon(pokemonName);
-  const speciesData = await getPokemonSpecies(pokemonName);
+  const [loading, setLoading] = useState(true);
+  const [pokemonObject, setPokemonObject] = useState(null);
+  const [speciesData, setSpeciesData] = useState(null);
 
-  
+  useEffect(() => {
+    async function fetchData() {
+      setLoading(true);
+      const pokemonData = await getPokemon(pokemonName);
+      const speciesData = await getPokemonSpecies(pokemonName);
+      setPokemonObject(pokemonData);
+      setSpeciesData(speciesData);
+      setLoading(false);
+    }
+    fetchData();
+  }, [pokemonName]);
+
   const formatPokemonNumber = (number: string): string => {
     return `#${String(number).padStart(4, "0")}`;
   }
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    );
+  }
+
   const totalStats = pokemonObject.stats.reduce((akumulasi: number, stat: any) => akumulasi + stat.base_stat, 0);
   const maxValue = 250;
-  
 
   return (
     <div className="relative container pt-5 mx-auto flex flex-col gap-10 pb-10">

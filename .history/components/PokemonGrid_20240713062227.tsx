@@ -52,9 +52,9 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                     />
                     <Select value={selectedType} onValueChange={(value) => setSelectedType(value)}>
                         <SelectTrigger>
-                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20 " />
+                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20" />
                         </SelectTrigger>
-                        <SelectContent className="">
+                        <SelectContent>
                             <SelectItem className="p-4" value="All Pokemon">
                                 All Pokemon
                             </SelectItem>

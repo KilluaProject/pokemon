@@ -40,7 +40,7 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
 
     return (
         <div className="relative flex flex-col gap-3">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-3">
                 <h1 className="text-2xl font-bold">Search Your Favorite Pokemon</h1>
                 <div className="grid grid-cols-2 gap-2 items-center">
                     <input
@@ -52,9 +52,9 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                     />
                     <Select value={selectedType} onValueChange={(value) => setSelectedType(value)}>
                         <SelectTrigger>
-                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20 " />
+                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20" />
                         </SelectTrigger>
-                        <SelectContent className="">
+                        <SelectContent>
                             <SelectItem className="p-4" value="All Pokemon">
                                 All Pokemon
                             </SelectItem>

@@ -3,6 +3,7 @@
 import { PokemonCard } from "./pokemonCard";
 import { useState } from "react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./ui/select";
+import { getPokemon } from "@/libs/pokemonApi"; // Ensure this import matches your project structure
 
 interface PokemonGridProps {
     pokemonList: any;
@@ -14,6 +15,7 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
     const [selectedType, setSelectedType] = useState("All Pokemon");
     const [loadData, setLoadData] = useState(20);
     const [loading, setLoading] = useState(false);
+    const [loadingPokemon, setLoadingPokemon] = useState<string | null>(null);
 
     const searchFilter = (pokemonList: any[]) => {
         return pokemonList.filter((pokemon) =>
@@ -38,13 +40,20 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
         }, 1000);
     };
 
+    const handleCardClick = async (name: string) => {
+        setLoadingPokemon(name);
+        const pokemon = await getPokemon(name);
+        console.log(pokemon); // Handle the fetched Pokémon data here
+        setLoadingPokemon(null);
+    };
+
     return (
         <div className="relative flex flex-col gap-3">
-            <div className="flex flex-col gap-5">
+            <div className="flex flex-col">
                 <h1 className="text-2xl font-bold">Search Your Favorite Pokemon</h1>
                 <div className="grid grid-cols-2 gap-2 items-center">
                     <input
-                        className="border px-4 py-2 rounded-md max-w-full w-full"
+                        className="border px-4 py-[2] rounded-md"
                         type="text"
                         value={searchText}
                         placeholder="Enter a Pokemon name"
@@ -52,9 +61,9 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                     />
                     <Select value={selectedType} onValueChange={(value) => setSelectedType(value)}>
                         <SelectTrigger>
-                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20 " />
+                            <SelectValue placeholder="Type Pokemon" className="placeholder:text-opacity-20" />
                         </SelectTrigger>
-                        <SelectContent className="">
+                        <SelectContent>
                             <SelectItem className="p-4" value="All Pokemon">
                                 All Pokemon
                             </SelectItem>
@@ -76,6 +85,8 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                             name={pokemon.name}
                             types={pokemon.types}
                             key={pokemon.name + "Card"}
+                            onClick={() => handleCardClick(pokemon.name)}
+                            loading={loadingPokemon === pokemon.name}
                         />
                     );
                 })}

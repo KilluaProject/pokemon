@@ -44,8 +44,6 @@ export default async function PokemonPage({ params }: PokemonDetailProps) {
   const { pokemonName } = params;
   const pokemonObject = await getPokemon(pokemonName);
   const speciesData = await getPokemonSpecies(pokemonName);
-
-  
   const formatPokemonNumber = (number: string): string => {
     return `#${String(number).padStart(4, "0")}`;
   }

@@ -7,6 +7,7 @@ export default async function Home() {
     const res = await fetch('https://pokeapi.co/api/v2/type');
     const typesData = await res.json();
     const types = typesData.results.map((type: any) => type.name);
+
     console.log(types);
     
 
