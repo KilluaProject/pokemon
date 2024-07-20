@@ -95,8 +95,8 @@ export default function PokemonPage({ params }: PokemonDetailProps) {
         <h2 className="text-center font-medium text-xl">{formatPokemonNumber(pokemonObject.id || '')}</h2>
       </div>
 
-      <div className="md:flex flex-none mx-auto justify-center items-start w-full gap-10">
-        <div className="border md:w-[40%] border-slate-200 p-4 rounded-md flex flex-col items-center justify-center bg-gray-100 h-[30rem]">
+      <div className="flex mx-auto justify-center items-start w-full gap-10">
+        <div className="border w-[40%] border-slate-200 p-4 rounded-md flex flex-col items-center justify-center bg-gray-100 h-[30rem]">
           <Image
             src={pokemonObject.sprites.other['official-artwork'].front_default}
             alt={pokemonObject.name}
@@ -107,7 +107,7 @@ export default function PokemonPage({ params }: PokemonDetailProps) {
           />
         </div>
         <div className="flex flex-col gap-3">
-          <h1 className="font-bold text-xl mt-5">Descriptions</h1>
+          <h1 className="font-bold text-xl">Descriptions</h1>
           <p className="font-normal max-w-lg">{speciesData.flavor_text_entries.find((entry: any) => entry.language.name === 'en')?.flavor_text || 'No description available.'}</p>
           <h2 className="text-xl font-bold">Type Pokemon</h2>
 
@@ -135,7 +135,7 @@ export default function PokemonPage({ params }: PokemonDetailProps) {
               return (
                 <div key={statName}>
                   <h3 className="uppercase">{statName}</h3>
-                  <Progress max={statPercentage} value={statPercentage} color='#011f4b' />
+                  <Progress max={statPercentage} value={statPercentage} />
                 </div>
               );
             })}

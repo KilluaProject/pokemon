@@ -68,7 +68,7 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                     </Select>
                 </div>
             </div>
-            <div className="grid gap-2 text-center md:mb-0 md:grid-cols-3 lg:grid-cols-4 lg:text-left">
+            <div className="grid gap-2 text-center md:mb-0 md:grid-cols-4 lg:text-left">
                 {filteredPokemonList.slice(0, loadData).map((pokemon: any) => {
                     return (
                         <PokemonCard

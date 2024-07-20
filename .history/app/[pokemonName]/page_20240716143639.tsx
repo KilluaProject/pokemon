@@ -107,7 +107,7 @@ export default function PokemonPage({ params }: PokemonDetailProps) {
           />
         </div>
         <div className="flex flex-col gap-3">
-          <h1 className="font-bold text-xl mt-5">Descriptions</h1>
+          <h1 className="font-bold text-xl">Descriptions</h1>
           <p className="font-normal max-w-lg">{speciesData.flavor_text_entries.find((entry: any) => entry.language.name === 'en')?.flavor_text || 'No description available.'}</p>
           <h2 className="text-xl font-bold">Type Pokemon</h2>
 
@@ -135,7 +135,7 @@ export default function PokemonPage({ params }: PokemonDetailProps) {
               return (
                 <div key={statName}>
                   <h3 className="uppercase">{statName}</h3>
-                  <Progress max={statPercentage} value={statPercentage} color='#011f4b' />
+                  <Progress max={statPercentage} value={statPercentage} />
                 </div>
               );
             })}

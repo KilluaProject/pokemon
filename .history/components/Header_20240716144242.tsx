@@ -6,7 +6,7 @@ export default function Header() {
     <div className='w-screen px-[50px] mx-auto bg-red-400 drop-shadow py-5 sticky top-0 z-50 text-white'>
         <div className='flex justify-between items-center'>
             <div className=''>
-                <Link href={"/"} className='text-xl md:text-4xl font-bold'>POKEDEX</Link>
+                <Link className='text-xl md:text-4xl font-bold'>POKEDEX</Link>
             </div>
             <div className='hidden md:flex'>
                 <ul className='flex gap-4 items-center justify-center'>

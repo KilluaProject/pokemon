@@ -48,7 +48,7 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                         className="border px-4 py-2 rounded-md max-w-full w-full placeholder:text-sm placeholder:font-normal"
                         type="text"
                         value={searchText}
-                        placeholder="Pikachu, Charizard etc ..."
+                        placeholder="Pikachu, Charizard, Zapdos etc ..."
                         onChange={(e) => setSearchText(e.target.value)}
                     />
                     <Select value={selectedType} onValueChange={(value) => setSelectedType(value)}>
@@ -68,7 +68,7 @@ export function PokemonGrid({ pokemonList, types }: PokemonGridProps) {
                     </Select>
                 </div>
             </div>
-            <div className="grid gap-2 text-center md:mb-0 md:grid-cols-3 lg:grid-cols-4 lg:text-left">
+            <div className="grid gap-2 text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
                 {filteredPokemonList.slice(0, loadData).map((pokemon: any) => {
                     return (
                         <PokemonCard

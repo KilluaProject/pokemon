@@ -135,7 +135,7 @@ export default function PokemonPage({ params }: PokemonDetailProps) {
               return (
                 <div key={statName}>
                   <h3 className="uppercase">{statName}</h3>
-                  <Progress max={statPercentage} value={statPercentage} color='#011f4b' />
+                  <Progress max={statPercentage} value={statPercentage} />
                 </div>
               );
             })}
